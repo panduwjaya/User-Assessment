@@ -14,15 +14,19 @@ import java.net.SocketTimeoutException
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.example.userassessment.ui.util.Result
+import com.example.userassessment.ui.util.TokenManager
 
 @Singleton
 class UserAssessmentRepository @Inject constructor(
-    private val networkingService: NetworkingService
+    private val networkingService: NetworkingService,
+    private val tokenManager: TokenManager
 ){
     fun fetchLogin(name: String, email: String): Flow<Result<LoginResponse>> = flow {
         emit(Result.Loading)
         try {
             val response = networkingService.postLogin(name,email)
+            val accessToken = response.accesToken
+            tokenManager.saveTokens(accessToken)
             emit(Result.Success(response))
         } catch (e: SocketTimeoutException) {
             emit(Result.Error("Koneksi ke server gagal"))

@@ -1,5 +1,6 @@
 package com.example.userassessment.dependency
 
+import com.example.userassessment.data.network.AuthInterceptor
 import com.example.userassessment.data.network.NetworkingService
 import dagger.Module
 import dagger.Provides
@@ -25,8 +26,11 @@ object AppModule {
     // 2. PROVIDE RETROFIT
     @Provides
     @Singleton
-    fun provideMainApiRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun provideMainApiRetrofit(
+        okHttpClient: OkHttpClient
+    ): Retrofit =
         Retrofit.Builder()
+            .addInterceptor(AuthInterceptor(tokenManager)) // Interceptor untuk menambahkan token
             .baseUrl(BASE_URL_MAIN)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
