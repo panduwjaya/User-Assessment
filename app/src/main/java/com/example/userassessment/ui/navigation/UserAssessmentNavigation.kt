@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.userassessment.ui.screen.home.HomeScreen
 import com.example.userassessment.ui.screen.login.LoginScreen
 import com.example.userassessment.ui.screen.register.RegisterScreen
 import com.example.userassessment.ui.screen.splash.SplashScreen
@@ -22,7 +23,6 @@ fun UserAssessmentNavigation(
         }
 
         composable(Screen.Login.route) {
-            LoginScreen()
             LoginScreen(
                 onAddClick = {
                     navController.navigate(Screen.InsertOrder.route)

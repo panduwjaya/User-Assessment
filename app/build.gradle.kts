@@ -64,6 +64,9 @@ dependencies {
     // Compose integration
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    // local
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     implementation(libs.androidx.compose.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
